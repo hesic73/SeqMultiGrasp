@@ -37,7 +37,8 @@
                             <span class="author-block">
                                 <a href="https://hesicheng.net/" target="_blank">Sicheng He</a><sup>1</sup>,
                                 <a href="https://zshanggu.github.io/" target="_blank">Zeyu Shangguan</a><sup>1</sup>,
-                                Kuanning Wang<sup>2</sup>,
+                                <a href="https://aclanthology.org/people/k/kuanning-wang/" target="_blank">Kuanning
+                                    Wang</a><sup>2</sup>,
                                 Yongchong Gu<sup>2</sup>,
                                 <a href="http://yuqianfu.com/" target="_blank"> Yuqian Fu</a><sup>3</sup>,
                                 <a href="https://yanweifu.github.io/" target="_blank">Yanwei Fu</a><sup>2</sup>,
@@ -69,14 +70,6 @@
                                         <span>Paper (Comming Soon)</span>
                                     </a>
                                 </span>
-                                <span class="link-block">
-                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
-                                        <span class="icon">
-                                            <i class="ai ai-arxiv"></i>
-                                        </span>
-                                        <span>arXiv (Comming Soon)</span>
-                                    </a>
-                                </span>
 
                                 <span class="link-block">
                                     <a href="#" class="external-link button is-normal is-rounded is-dark">
@@ -96,6 +89,76 @@
         </div>
     </section>
 
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Sequentially grasping multiple objects with multi-fingered hands is common in daily life,
+                            where humans can fully leverage the dexterity of their hands to enclose multiple objects.
+                            However, the diversity of object geometries and the complex contact interactions required
+                            for high-DOF hands to grasp one object while enclosing another make sequential multi-object
+                            grasping challenging for robots.
+
+                            In this paper, we propose SeqMultiGrasp, a system for sequentially grasping
+                            objects with a
+                            four-fingered Allegro Hand. We focus on sequentially grasping two objects, ensuring that the
+                            hand fully encloses one object before lifting it and then grasps the second object without
+                            dropping the first.
+
+                            Our system first synthesizes single-object grasp candidates, where each grasp is constrained
+                            to use only a subset of the hand's links. These grasps are then validated in a physics
+                            simulator to ensure stability and feasibility. Next, we merge the validated single-object
+                            grasp poses to construct multi-object grasp configurations. For real-world deployment, we
+                            train a diffusion model conditioned on point clouds to propose grasp poses, followed by a
+                            heuristic-based execution strategy.
+
+                            We test our system using 8 × 8 object combinations in simulation and
+                            6 × 3 object combinations in real. Our diffusion-based grasp model
+                            obtains an average success rate of 65.8% over 1600
+                            simulation trials and 56.7% over 90 real-world trials,
+                            suggesting that it is a promising approach for sequential multi-object grasping with
+                            multi-fingered hands.
+                        </p>
+
+
+                    </div>
+                </div>
+            </div>
+
+    </section>
+
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title is-3">Acknowledgement</h2>
+            <p>
+                We thank <a href="https://scholar.google.com/citations?user=BIPK9KEAAAAJ" target="_blank">Haozhe
+                    Lou</a>, <a href="https://scottgao.netlify.app/" target="_blank">Zhiyuan Gao</a>, <a
+                    href="https://yiyang0207.github.io/" target="_blank">Yiyang Ling</a>, <a
+                    href="https://panchaoyi.com/" target="_blank">Chaoyi Pan</a>, and <a
+                    href="https://geng-haoran.github.io/" target="_blank">Haoran Geng</a> for their
+                helpful
+                technical advice and discussions. We are <strong>especially grateful to <a href="https://yuyangli.com/"
+                        target="_blank">Yuyang Li</a></strong> for his
+                invaluable help and support.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre>
+                <code>
+                    
+                </code>
+            </pre>
+        </div>
+    </section>
 
 
     <footer class="footer">
