@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Sequential Multi-Object Grasping with One Dexterous Hand">
+    <meta name="keywords" content="Dexterous Manipulation, Multi-Object Grasping, Sequential Grasping">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sequential Multi-Object Grasping with One Dexterous Hand</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title">Sequential Multi-Object Grasping with One Dexterous
+                            Hand</h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a href="https://hesicheng.net/" target="_blank">Sicheng He</a><sup>1</sup>,
+                                <a href="https://zshanggu.github.io/" target="_blank">Zeyu Shangguan</a><sup>1</sup>,
+                                <a href="https://sressers.github.io/knw/" target="_blank">Kuanning
+                                    Wang</a><sup>2</sup>,
+                                Yongchong Gu<sup>2</sup>,
+                                <a href="http://yuqianfu.com/" target="_blank"> Yuqian Fu</a><sup>3</sup>,
+                                <a href="https://yanweifu.github.io/" target="_blank">Yanwei Fu</a><sup>2</sup>,
+                                <a href="https://danielseita.github.io/" target="_blank">Daniel Seita</a><sup>1</sup>
+
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <sup>1</sup><span class="author-block">University of Southern California</span>,
+                            <sup>2</sup><span class="author-block">Fudan University</span>,
+                            <sup>3</sup><span class="author-block">INSAIT</span>
+                        </div>
+
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">International Conference on Intelligent Robots and Systems (IROS)
+                                2025</span>
+                        </div>
+
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/abs/2503.09078" target="_blank"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fas fa-file-pdf"></i>
+                                        </span>
+                                        <span>Paper</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                    <a href="#" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">
+                                            <i class="fab fa-github"></i>
+                                        </span>
+                                        <span>Code (Comming Soon)</span>
+                                    </a>
+                                </span>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero teaser">
+        <div class="container is-max-desktop">
+            <div class="hero-body">
+                <img id="teaser" src="./static/images/pull.png" alt="Teaser">
+            </div>
+        </div>
+    </section>
+
+    <section class="hero is-light is-small">
+        <div class="hero-body">
+            <div class="container">
+                <div id="results-carousel" class="carousel results-carousel">
+
+                    <div class="item">
+                        <video poster autoplay controls muted loop playsinline height="100%">
+                            <source src="static/videos/real_deployment/cube_soup_can.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item">
+                        <video poster autoplay controls muted loop playsinline height="100%">
+                            <source src="static/videos/real_deployment/duck_pepsi.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item">
+                        <video poster autoplay controls muted loop playsinline height="100%">
+                            <source src="static/videos/simulation_rollouts_16_9/plum_tomato_soup_can.mp4"
+                                type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item">
+                        <video poster autoplay controls muted loop playsinline height="100%">
+                            <source src="static/videos/real_deployment/lemon_cylinder.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item">
+                        <video poster autoplay controls muted loop playsinline height="100%">
+                            <source src="static/videos/real_deployment/plum_pepsi.mp4" type="video/mp4">
+                        </video>
+                    </div>
+
+                    <div class="item">
+                        <video poster autoplay controls muted loop playsinline height="100%">
+                            <source src="static/videos/simulation_rollouts_16_9/lemon_medicine_bottle.mp4"
+                                type="video/mp4">
+                        </video>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Sequentially grasping multiple objects with multi-fingered hands is common in daily life,
+                            where humans can fully leverage the dexterity of their hands to enclose multiple objects.
+                            However, the diversity of object geometries and the complex contact interactions required
+                            for high-DOF hands to grasp one object while enclosing another make sequential multi-object
+                            grasping challenging for robots.
+
+                            In this paper, we propose SeqMultiGrasp, a system for sequentially grasping
+                            objects with a
+                            four-fingered Allegro Hand. We focus on sequentially grasping two objects, ensuring that the
+                            hand fully encloses one object before lifting it and then grasps the second object without
+                            dropping the first.
+
+                            Our system first synthesizes single-object grasp candidates, where each grasp is constrained
+                            to use only a subset of the hand's links. These grasps are then validated in a physics
+                            simulator to ensure stability and feasibility. Next, we merge the validated single-object
+                            grasp poses to construct multi-object grasp configurations. For real-world deployment, we
+                            train a diffusion model conditioned on point clouds to propose grasp poses, followed by a
+                            heuristic-based execution strategy.
+
+                            We test our system using 8 × 8 object combinations in simulation and
+                            6 × 3 object combinations in real. Our diffusion-based grasp model
+                            obtains an average success rate of 65.8% over 1600
+                            simulation trials and 56.7% over 90 real-world trials,
+                            suggesting that it is a promising approach for sequential multi-object grasping with
+                            multi-fingered hands.
+                        </p>
+
+
+                    </div>
+                </div>
+            </div>
+
+    </section>
+
+
+    <section class="section" style="padding-top: 1rem; padding-bottom: 1rem;" id="Overview">
+        <div class="container is-max-desktop content">
+            <h2 class="title is-3">Overview</h2>
+            <img src="./static/images/figure2.png" alt="SeqMultiGrasp schematic">
+            <p class="has-text-centered">Overview of SeqMultiGrasp.
+                (a) Contact candidates for different grasp types, where red and blue dots are used for pinch-like and
+                side grasps, respectively.
+                (b) Multi-object grasp configuration generation, where validated single-object grasps are merged into
+                feasible multi-object grasps.
+                (c) Real-world grasp proposal process, where a diffusion model conditioned on point clouds generates
+                grasp poses.
+                (d) Illustration of heuristic-based sequential grasping execution.
+            </p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem; padding-bottom: 1rem;" id="Results">
+        <div class="container is-max-desktop content">
+            <h2 class="title is-3">Video Rollouts</h2>
+
+            <!-- <h3 class="title is-4">Learned Grasp Evaluation in Simulation</h3>
+
+            <div class="columns">
+
+                <div class="column is-one-third">
+                    <div class="publication-video-4-3">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/simulation_rollouts/bottle_cylinder.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column is-one-third">
+                    <div class="publication-video-4-3">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/simulation_rollouts/bunny_bottle_030.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column is-one-third">
+                    <div class="publication-video-4-3">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/simulation_rollouts/cube_boxed_beverage.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="columns">
+
+                <div class="column is-one-third">
+                    <div class="publication-video-4-3">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/simulation_rollouts/cylinder_pepsi.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column is-one-third">
+                    <div class="publication-video-4-3">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/simulation_rollouts/lemon_medicine_bottle.mp4"
+                                type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column is-one-third">
+                    <div class="publication-video-4-3">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/simulation_rollouts/plum_tomato_soup_can.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+            </div> -->
+
+            <h3 class="title is-4">Real-World Replay</h3>
+
+            <div class="columns">
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/real_replay/bunny_pepsi.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/real_replay/cylinder_cylinder.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="columns">
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/real_replay/lemon_tomato_soup.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/real_replay/plum_tomato_soup.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+            </div>
+
+            <h3 class="title is-4">Real-World Learned Grasp Evaluation</h3>
+
+            <div class="columns">
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/real_deployment/cube_soup_can.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/real_deployment/duck_pepsi.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="columns">
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/real_deployment/lemon_cylinder.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/real_deployment/plum_pepsi.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+            </div>
+
+            <h3 class="title is-4">Failures</h3>
+
+            <div class="columns">
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/failures/lemon_pepsi.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="column is-half">
+                    <div class="publication-video">
+                        <video controls="" muted="" height="100%">
+                            <source src="./static/videos/failures/bunny_cylinder.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 1rem; padding-bottom: 1rem;" id="Acknowledgement">
+        <div class="container is-max-desktop content">
+            <h2 class="title is-3">Acknowledgement</h2>
+            <p>
+                We thank <a href="https://scholar.google.com/citations?user=BIPK9KEAAAAJ" target="_blank">Haozhe
+                    Lou</a>, <a href="https://scottgao.netlify.app/" target="_blank">Zhiyuan Gao</a>, <a
+                    href="https://yiyang0207.github.io/" target="_blank">Yiyang Ling</a>, <a
+                    href="https://panchaoyi.com/" target="_blank">Chaoyi Pan</a>, and <a
+                    href="https://geng-haoran.github.io/" target="_blank">Haoran Geng</a> for their
+                helpful
+                technical advice and discussions. We are <strong>especially grateful to <a href="https://yuyangli.com/"
+                        target="_blank">Yuyang Li</a></strong> for his
+                invaluable help and support. We sincerely thank the IROS 2025 reviewers for their constructive feedback.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>@article{he2025sequential,
+    title={Sequential Multi-Object Grasping with One Dexterous Hand}, 
+    author={Sicheng He and Zeyu Shangguan and Kuanning Wang and Yongchong Gu and Yuqian Fu and Yanwei Fu and Daniel Seita},
+    journal={arXiv preprint arXiv:2503.09078}, 
+    year={2025}
+}</code></pre>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        <p>
+                            This website template is borrowed from <a
+                                href="https://github.com/nerfies/nerfies.github.io">nerfies.github.io</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
