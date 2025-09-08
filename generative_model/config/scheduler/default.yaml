@@ -1,0 +1,7 @@
+defaults:
+  - _self_
+
+num_train_timesteps: 100
+beta_schedule: "linear"
+beta_start: 0.0001
+beta_end: 0.01

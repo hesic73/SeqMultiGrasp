@@ -1,0 +1,7 @@
+fingertip_link:
+  thumb: link_15.0_tip
+  others: [link_3.0_tip, link_7.0_tip, link_11.0_tip] # index, middle, ring
+
+fingertip_normal:
+  thumb: [1, 0, 0]
+  others: [[1, 0, 0], [1, 0, 0], [1, 0, 0]]

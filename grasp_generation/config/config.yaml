@@ -1,0 +1,76 @@
+defaults:
+  - override hydra/job_logging: default
+  - override hydra/hydra_logging: default
+
+# Experiment settings
+seed: 1
+
+object_code: cube
+
+active_links:
+  [
+    "base_link",
+    "link_0.0",
+    "link_1.0",
+    "link_2.0",
+    "link_3.0",
+    "link_3.0_tip",
+    "link_4.0",
+    "link_5.0",
+    "link_6.0",
+    "link_7.0",
+    "link_7.0_tip",
+    "link_8.0",
+    "link_9.0",
+    "link_10.0",
+    "link_11.0",
+    "link_11.0_tip",
+    "link_12.0",
+    "link_13.0",
+    "link_14.0",
+    "link_15.0",
+    "link_15.0_tip",
+  ]
+
+name: ${now:%Y-%m-%d_%H-%M-%S}
+gpu: "0"
+n_contact: 4
+batch_size: 128
+n_iter: 6000
+
+# Hyperparameters
+
+optimizer:
+  switch_possibility: 0.5
+  mu: 0.98
+  eps: 1e-6
+  noise_size: 0.005
+  stepsize_period: 50
+  starting_temperature: 18
+  annealing_period: 30
+  temperature_decay: 0.95
+
+w_dis: 100.0
+w_pen: 100.0
+w_spen: 30.0
+w_joints: 1.0
+
+levitate: false
+
+ground_offset: 0.005
+
+initialization_method: "multi_grasp" # Options: "convex_hull", "multi_grasp", "side_grasp"
+
+# Initialization settings
+jitter_strength: 0.1
+qpos_loc: [0, 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 1.4, 0, 0, 0]
+
+# Energy thresholds
+thres_fc: 0.3
+thres_dis: 0.005
+thres_pen: 0.001
+
+use_writer: true
+
+verbose: false
+disable_tqdm: false

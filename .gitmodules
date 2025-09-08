@@ -1,0 +1,9 @@
+[submodule "third-party/curobo"]
+	path = third-party/curobo
+	url = git@github.com:hesic73/curobo.git
+[submodule "third-party/kaolin"]
+	path = third-party/kaolin
+	url = git@github.com:hesic73/kaolin.git
+[submodule "third-party/allegro_visualization"]
+	path = third-party/allegro_visualization
+	url = git@github.com:hesic73/allegro_visualization.git

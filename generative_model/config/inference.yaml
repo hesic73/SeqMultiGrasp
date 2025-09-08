@@ -1,0 +1,21 @@
+# inference.yaml
+defaults:
+  - _self_
+  - model: rot_mat
+  - scheduler: default
+
+device: "cuda"
+seed: 123
+
+batch_size: 32
+
+checkpoint_path:
+stats_path:
+pc_stats_path:
+
+
+num_inference_steps: 100
+
+rotation_representation: "rotation_matrix"
+
+use_keypoints: false

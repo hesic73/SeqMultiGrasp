@@ -1,0 +1,17 @@
+hydra-core==1.3.2
+omegaconf==2.3.0
+tqdm
+numpy
+tensorboard
+diffusers
+transforms3d
+trimesh
+pytorch-kinematics
+einops
+plotly
+urdf-parser-py
+h5py
+wandb
+loguru
+tyro
+pyglet<2

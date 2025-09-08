@@ -1,0 +1,47 @@
+defaults:
+  - _self_
+  - model: rot_mat
+  - scheduler: default
+
+log_root_dir: "logs"
+
+run_name:
+
+rand_t_type: half
+
+train:
+  device: "cuda"
+  batch_size: 512
+  num_epochs: 500
+  lr: 3e-4
+  seed: 123
+  save_interval: 50
+  num_workers: 8
+
+  resume_checkpoint:
+  resume_model_only: false
+
+# eval:
+#   batch_size: 32
+#   eval_interval: 50
+
+# logger:
+#   logger_type: "tensorboard"
+
+logger:
+  logger_type: "wandb"
+  project: "seq_multi_grasp_generation"
+  group:
+  job_type: "train"
+  mode: "online"
+
+use_keypoints: true
+stats_path:
+qpos_noise_var: 1e-3
+rot_augmentation: false
+
+rotation_representation: "rotation_matrix"
+
+data:
+  data_path:
+  object_lists:

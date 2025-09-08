@@ -1,0 +1,10 @@
+/outputs
+*.npy
+*.mp4
+
+/mp_logs
+/logs/*
+/discovery_logs/*
+
+
+*.png
