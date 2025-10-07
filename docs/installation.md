@@ -7,26 +7,17 @@ conda create -n seq_multi_grasp python=3.9
 conda activate seq_multi_grasp
 ```
 
-## Step 2: Install CUDA Toolkit
+## Step 2: Check CUDA Version
 
-Choose the appropriate CUDA version:
-
-```bash
-# CUDA 11.8
-conda install nvidia/label/cuda-11.8.0::cuda-toolkit
-
-# or CUDA 12.4
-conda install nvidia/label/cuda-12.4.0::cuda-toolkit
-```
-
-The setup has been tested with CUDA 11.8 and CUDA 12.4, but no fundamental differences are expected between versions.
-
-Alternatively, you can use the system-installed CUDA:
+Check your system's installed CUDA version:
 
 ```bash
 which nvcc
 nvcc --version
 ```
+
+The setup has been tested with CUDA 11.8, CUDA 12.4 and CUDA 12.8. In theory, other CUDA versions should also work as long as PyTorch is compiled against the same version found via `nvcc`.
+
 
 ## Step 3: Install PyTorch (Ensure Compatibility with Your CUDA Version)
 
@@ -36,6 +27,10 @@ pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https
 
 # For CUDA 12.4
 pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu124
+
+# For CUDA 12.8
+pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu128
+conda install -c conda-forge libstdcxx-ng
 ```
 
 ## Step 4: Build and Install PyTorch3D
@@ -47,7 +42,7 @@ pip install "git+https://github.com/facebookresearch/pytorch3d.git"
 ## Step 5: Install ManiSkill3
 
 ```bash
-pip install --upgrade git+https://github.com/haosulab/ManiSkill.git
+pip install git+https://github.com/haosulab/ManiSkill.git@v3.0.0b21
 ```
 
 ## Step 6: Install Additional Dependencies
