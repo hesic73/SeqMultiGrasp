@@ -13,7 +13,7 @@ python main.py \
     'active_links=["link_13.0","link_14.0","link_15.0","link_15.0_tip","link_1.0","link_2.0","link_3.0","link_3.0_tip"]' \
     n_contact=2 \
     n_iter=6000 \
-    batch_size=256
+    batch_size=512
 ```
 
 The results will be saved under `data/experiments/my_run_cube`. TensorBoard logs are located in the `logs` subdirectory:
@@ -41,10 +41,25 @@ python main.py \
     'active_links=["link_9.0","link_10.0","link_11.0","link_11.0_tip","base_link"]' \
     n_contact=4 \
     n_iter=6000 \
-    batch_size=256 \
+    batch_size=512 \
     initialization_method=side_grasp \
     'qpos_loc=[0.0,-0.196,0.0,0.4,0.0,0.7,0.0,0.4,0.021,1.395,1.05,0.797,0.263,0.0,0.0,0.0]' \
     ground_offset=0.02
+```
+
+To collect many validated grasps into a single HDF5 file, use `generate_grasp_dataset.py`.
+
+```bash
+python generate_grasp_dataset.py \
+    --object_name cube \
+    --n_contact 3 \
+    --active_links "[link_15.0,link_15.0_tip,link_2.0,link_3.0_tip,link_6.0,link_7.0_tip]" \
+    --qpos_loc 0,0.5,0,0,0,0.5,0,0,0,0.5,0,0,1.4,0,0,0 \
+    --ground_offset 0.00 \
+    --hdf5_path cube.h5 \
+    --gpu 0 \
+    --batch_size 1024 \
+    --initialization_method multi_grasp
 ```
 
 ### Merge Grasps
@@ -52,7 +67,7 @@ python main.py \
 
 ```bash
 python merge.py --path_0 ../data/experiments/my_run_cube/results/cube_success_validated.npy \
---path_1 ../data/experiments/my_run_cylinder_r_2_85_h_10_5/results/cylinder_r_2_85_h_10_5_tabletop_validated.npy \
+--path_1 ../data/experiments/my_run_cylinder_r_2_85_h_10_5/results/cylinder_r_2_85_h_10_5_success_validated.npy \
 --save_path cube_cylinder_r_2_85_h_10_5.h5
 ```
 
@@ -63,7 +78,7 @@ Use the new Python scripts with tyro CLI:
 
 ```bash
 python visualize_single_object.py \
-  --data_path ../data/experiments/my_run_cylinder_r_2_85_h_10_5/results/cylinder_r_2_85_h_10_5_tabletop_validated.npy \
+  --data_path ../data/experiments/my_run_cylinder_r_2_85_h_10_5/results/cylinder_r_2_85_h_10_5_success_validated.npy \
   --index 0
 
 python visualize_multiple_objects.py \

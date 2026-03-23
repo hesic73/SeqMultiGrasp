@@ -5,7 +5,7 @@ from utils.logger import Logger
 from utils.optimizer import Annealing
 from utils.energy import cal_energy
 from utils.initializations import (
-    single_initialize_convex_hull,
+    initialize_convex_hull_single_object,
     initialize_multi_grasp,
     initialize_side_grasp,
 )
@@ -87,7 +87,7 @@ def main(cfg: OmegaConf):
     total_batch_size = cfg.batch_size
 
     if cfg.initialization_method == "convex_hull":
-        single_initialize_convex_hull(
+        initialize_convex_hull_single_object(
             hand_model=hand_model,
             object_model=object_model,
             distance_lower=0.2,

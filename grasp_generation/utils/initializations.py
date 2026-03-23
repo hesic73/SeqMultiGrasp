@@ -48,7 +48,7 @@ def random_rotation_around_direction(total_batch_size: int, direction: torch.Ten
     return rotation_matrices
 
 
-def initialize_convex_hull(
+def initialize_convex_hull_multi_object(
     hand_model: HandModel,
     object_model: ObjectModel,
     distance_lower: float,
@@ -181,7 +181,7 @@ def initialize_convex_hull(
     hand_model.set_parameters(hand_pose, contact_point_indices)
 
 
-def single_initialize_convex_hull(
+def initialize_convex_hull_single_object(
     hand_model: HandModel,
     object_model: SingleObjectModel,
     distance_lower: float,
@@ -304,18 +304,16 @@ def single_initialize_convex_hull(
     hand_model.set_parameters(hand_pose, contact_point_indices)
 
 
-def initialize_seq_multi_grasp(
+def initialize_multi_grasp_with_object(
     hand_model: HandModelWithObject,
     total_batch_size: int,
     n_contact: int,
     jitter_strength: float,
     contact_candidates_weight: torch.Tensor,
-    # New arguments (similar to initialize_multi_grasp):
     translation_loc: Sequence[float],
     translation_scale: Sequence[float],
     rotation_rpy: Sequence[float],
     qpos_loc: Sequence[float],
-    # Optional: If you want to mask out certain joints
     active_joint_mask: torch.Tensor = None,
 ):
     
@@ -338,8 +336,7 @@ def initialize_seq_multi_grasp(
 
     # For demonstration, let’s pick a direction vector around +X (as in initialize_multi_grasp)
     direction_vector = torch.tensor([1.0, 0.0, 0.0], device=device)
-    direction_vector = R_hand_base @ direction_vector
-    direction_vector = -direction_vector  # As in the original code
+    direction_vector = -(R_hand_base @ direction_vector)
 
     # Generate random rotation around that direction
     perturbation_strength = 0.5
@@ -398,7 +395,6 @@ def initialize_seq_multi_grasp(
     hand_model.set_parameters(hand_pose, contact_point_indices)
 
 
-# as in MultiGrasp
 def initialize_multi_grasp(
     hand_model: HandModel,
     batch_size: int,

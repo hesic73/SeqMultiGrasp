@@ -3,7 +3,7 @@
 ## Step 1: Set Up Conda Environment
 
 ```bash
-conda create -n seq_multi_grasp python=3.9
+conda create -n seq_multi_grasp python=3.12
 conda activate seq_multi_grasp
 ```
 
@@ -23,20 +23,20 @@ The setup has been tested with CUDA 11.8, CUDA 12.4 and CUDA 12.8. In theory, ot
 
 ```bash
 # For CUDA 11.8
-pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu118
+pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu118
 
 # For CUDA 12.4
-pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cu124
+pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu124
 
 # For CUDA 12.8
-pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu128
+pip install torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu128
 conda install -c conda-forge libstdcxx-ng
 ```
 
 ## Step 4: Build and Install PyTorch3D
 
 ```bash
-pip install "git+https://github.com/facebookresearch/pytorch3d.git"
+pip install "git+https://github.com/facebookresearch/pytorch3d.git" --no-build-isolation
 ```
 
 ## Step 5: Install ManiSkill3
@@ -56,7 +56,6 @@ pip install -r requirements.txt
 Some dependencies should be installed separately:
 
 ```bash
-
 git submodule update --init --recursive
 
 
@@ -70,7 +69,7 @@ cd ../..
 cd third-party/kaolin
 pip install -r tools/build_requirements.txt -r tools/viz_requirements.txt -r tools/requirements.txt
 export IGNORE_TORCH_VER=1
-pip install -e .
+pip install -e . --no-build-isolation
 
 cd ../..
 
@@ -84,5 +83,4 @@ cd third-party/allegro_visualization
 pip install -e .
 
 cd ../..
-
 ```

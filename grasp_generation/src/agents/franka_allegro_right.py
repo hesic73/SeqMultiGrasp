@@ -159,7 +159,6 @@ class FrankaAllegoRight(BaseAgent):
         "link_11.0_tip", "link_11.0", "link_10.0", "link_9.0",  # ring
     ]
 
-    # NOTE (hsc): 基类里palm_link_name是palm
     _palm_link_name = "base_link"
 
     @property
