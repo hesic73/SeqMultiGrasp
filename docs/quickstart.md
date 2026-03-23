@@ -67,7 +67,7 @@ python generate_grasp_dataset.py \
 
 ```bash
 python merge.py --path_0 ../data/experiments/my_run_cube/results/cube_success_validated.npy \
---path_1 ../data/experiments/my_run_cylinder_r_2_85_h_10_5/results/cylinder_r_2_85_h_10_5_success_validated.npy \
+--path_1 ../data/experiments/my_run_cylinder_r_2_85_h_10_5/results/cylinder_r_2_85_h_10_5_tabletop_validated.npy \
 --save_path cube_cylinder_r_2_85_h_10_5.h5
 ```
 
@@ -78,7 +78,7 @@ Use the new Python scripts with tyro CLI:
 
 ```bash
 python visualize_single_object.py \
-  --data_path ../data/experiments/my_run_cylinder_r_2_85_h_10_5/results/cylinder_r_2_85_h_10_5_success_validated.npy \
+  --data_path ../data/experiments/my_run_cylinder_r_2_85_h_10_5/results/cylinder_r_2_85_h_10_5_tabletop_validated.npy \
   --index 0
 
 python visualize_multiple_objects.py \
