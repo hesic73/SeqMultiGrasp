@@ -66,7 +66,7 @@ python generate_grasp_dataset.py \
 
 
 ```bash
-python merge.py --path_0 ../data/experiments/my_run_cube/results/cube_success_validated.npy \
+python merge.py --path_0 ../data/experiments/my_run_cube/results/cube_tabletop_validated.npy \
 --path_1 ../data/experiments/my_run_cylinder_r_2_85_h_10_5/results/cylinder_r_2_85_h_10_5_tabletop_validated.npy \
 --save_path cube_cylinder_r_2_85_h_10_5.h5
 ```
