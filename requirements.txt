@@ -15,3 +15,4 @@ wandb
 loguru
 tyro
 pyglet<2
+pandas
