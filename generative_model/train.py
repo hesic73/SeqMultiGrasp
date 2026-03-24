@@ -15,7 +15,7 @@ from diffusers import DDPMScheduler
 from tqdm import tqdm
 
 from src.data import MultiGraspDataset
-from src.data.utils import make_process_batch_fn, make_x0_normalizer, RotationRepresentation
+from src.data.utils import make_process_batch_fn, make_x0_normalizer, RotationRepresentation, compute_d_x
 from src.network.unet import UNetModel
 from src.network.model import MyModel
 from src.consts import CONFIG_PATH
@@ -137,13 +137,17 @@ def main(cfg: DictConfig):
 
     device = cfg.train.device
 
+    rotation_representation = RotationRepresentation[cfg.rotation_representation]
+    use_keypoints = cfg.get("use_keypoints", False)
+
     # model
+    OmegaConf.update(cfg, "model.d_x", compute_d_x(rotation_representation, use_keypoints))
     unet = UNetModel(**cfg.model)
     model = MyModel(unet).to(device)
 
     # noise_scheduler
     noise_scheduler = DDPMScheduler(**cfg.scheduler)
-    rand_t_type = cfg.scheduler.get("rand_t_type", "half")
+    rand_t_type = cfg.rand_t_type
 
     # optimizer
     optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.train.lr)
@@ -183,8 +187,7 @@ def main(cfg: DictConfig):
     use_keypoints = cfg.get("use_keypoints", True)
     q_noise_var = cfg.get("q_noise_var", None)
     rot_augmentation = cfg.get("rot_augmentation", False)
-    rotation_representation = cfg.get(
-        "rotation_representation", None) or "rot6d"
+    rotation_representation = cfg.rotation_representation
     rotation_representation = RotationRepresentation[rotation_representation]
 
     if use_keypoints:

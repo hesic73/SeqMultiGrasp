@@ -1,6 +1,6 @@
 defaults:
   - _self_
-  - model: rot_mat
+  - model: default
   - scheduler: default
 
 log_root_dir: "logs"
@@ -35,7 +35,7 @@ logger:
   job_type: "train"
   mode: "online"
 
-use_keypoints: true
+use_keypoints: false
 stats_path:
 qpos_noise_var: 1e-3
 rot_augmentation: false

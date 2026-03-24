@@ -22,6 +22,21 @@ class RotationRepresentation(Enum):
     axis_angle = 'axis_angle'
 
 
+_ROT_DIM = {
+    RotationRepresentation.rot6d:           6,
+    RotationRepresentation.rpy:             3,
+    RotationRepresentation.quaternion:      4,
+    RotationRepresentation.rotation_matrix: 9,
+    RotationRepresentation.axis_angle:      3,
+}
+
+
+def compute_d_x(rotation_representation: RotationRepresentation, use_keypoints: bool) -> int:
+    d_rot = _ROT_DIM[rotation_representation]
+    hand_dim = 16 * 3 if use_keypoints else 16
+    return 2 * (3 + d_rot) + hand_dim
+
+
 def _convert_pose(pose: torch.Tensor, rotation_representation: RotationRepresentation) -> torch.Tensor:
     if rotation_representation == RotationRepresentation.rot6d:
         return convert_xyz_rpy_to_xyz_rot6d(pose)

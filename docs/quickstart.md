@@ -97,3 +97,33 @@ python eval.py \
   --vis \
   --output_dir "../data/experiments/eval_cube_cylinder_r_2_85_h_10_5"
 ```
+
+## generative_model
+
+**Note:** The commands below use a minimal two-object demo dataset. Real training requires a larger and more diverse set of object combinations.
+
+
+### Training
+
+```bash
+cd generative_model
+
+python train.py \
+    train.batch_size=16 \
+    data.data_path=../grasp_generation/cube_cylinder_r_2_85_h_10_5.h5
+```
+
+### Inference
+
+```bash
+python inference.py \
+    checkpoint_path=logs/<run_name>/<seed>/checkpoints/final.pth \
+    +objects="[cube,cylinder_r_2_85_h_10_5]" \
+    +output_path=output.h5
+
+python pairwise_object_inference.py \
+    checkpoint_path=logs/<run_name>/<seed>/checkpoints/final.pth \
+    +object_0_names="[cube]" \
+    +object_1_names="[cylinder_r_2_85_h_10_5]" \
+    +output_dir=logs/<run_name>/<seed>/results/final
+```

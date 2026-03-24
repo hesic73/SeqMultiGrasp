@@ -1,9 +1,7 @@
 import os
-import json
 import itertools
 import numpy as np
 import torch
-import torch.nn as nn
 import trimesh
 from pathlib import Path
 
@@ -23,7 +21,7 @@ from src.utils.pytorch3d_utils import batched_sample_points
 from src.utils.hdf5_utils import create_hdf5
 from src.utils.keypoints_utils import HandModelKeypoints
 
-from src.data.utils import make_x0_unnormalizer, RotationRepresentation, _convert_pose_back
+from src.data.utils import make_x0_unnormalizer, RotationRepresentation, _convert_pose_back, compute_d_x, _ROT_DIM
 
 from src.consts import CONFIG_PATH
 
@@ -31,7 +29,7 @@ _MESHDATA_PATH = str(Path(__file__).parent.parent / "grasp_generation" / "assets
 
 
 @torch.no_grad()
-def sample_diffusion(model: nn.Module, scheduler: DDPMScheduler, pc: torch.Tensor, d_x: int,
+def sample_diffusion(model, scheduler: DDPMScheduler, pc: torch.Tensor, d_x: int,
                      device="cuda", num_inference_steps=100):
     model.eval()
 
@@ -70,26 +68,15 @@ def main(cfg: DictConfig):
 
     device = cfg.device if torch.cuda.is_available() else "cpu"
 
+    rotation_representation = RotationRepresentation(cfg.rotation_representation)
+    use_keypoints = cfg.use_keypoints
+    d_rot = _ROT_DIM[rotation_representation]
+
+    OmegaConf.update(cfg, "model.d_x", compute_d_x(rotation_representation, use_keypoints))
     model, noise_scheduler = create_model_and_scheduler(cfg, device=device)
     load_checkpoint(model, cfg.checkpoint_path)
 
     os.makedirs(cfg.output_dir, exist_ok=True)
-
-    rotation_representation = cfg.rotation_representation
-    rotation_representation = RotationRepresentation(rotation_representation)
-
-    if rotation_representation == RotationRepresentation.rot6d:
-        d_rot = 6
-    elif rotation_representation == RotationRepresentation.quaternion:
-        d_rot = 4
-    elif rotation_representation == RotationRepresentation.rpy:
-        d_rot = 3
-    elif rotation_representation == RotationRepresentation.rotation_matrix:
-        d_rot = 9
-    elif rotation_representation == RotationRepresentation.axis_angle:
-        d_rot = 3
-    else:
-        raise ValueError("Invalid rotation_representation")
 
     x0_unnormalizer = None
     if cfg.get("stats_path", None):
@@ -115,18 +102,6 @@ def main(cfg: DictConfig):
                 mesh, batch_size=cfg.batch_size, n_points=1024, device=device)
             pcs.append(pts)
         pc = torch.stack([pcs[0], pcs[1]], dim=1)
-
-        if cfg.get("pc_stats_path", None):
-            if not os.path.isfile(cfg.pc_stats_path):
-                raise FileNotFoundError(
-                    f"pc_stats_path not found: {cfg.pc_stats_path}")
-            with open(cfg.pc_stats_path, 'r') as f:
-                pc_stats = json.load(f)
-                pc_loc = torch.tensor(
-                    pc_stats['pc_loc'], device=device).float()
-                pc_scale = torch.tensor(
-                    pc_stats['pc_scale'], device=device).float()
-                pc = (pc - pc_loc) / pc_scale
 
         x0 = sample_diffusion(
             model=model,
